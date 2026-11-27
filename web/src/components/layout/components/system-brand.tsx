@@ -27,6 +27,9 @@ import {
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { cn } from '@/lib/utils'
+/* theme:console-noir:start */
+import { CONSOLE_NOIR_THEME } from '@/themes/console-noir/config'
+/* theme:console-noir:end */
 
 type SystemBrandProps = {
   defaultName?: string
@@ -94,7 +97,9 @@ export function SystemBrand(props: SystemBrandProps) {
           </div>
           <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
             <span className='truncate font-semibold'>{name}</span>
-            <span className='truncate text-xs'>{version}</span>
+            {!CONSOLE_NOIR_THEME.hideBrandVersion && (
+              <span className='truncate text-xs'>{version}</span>
+            )}
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

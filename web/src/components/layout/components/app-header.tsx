@@ -24,6 +24,9 @@ import { Search } from '@/components/search'
 import { SystemUpdateAction } from '@/features/system-update/system-update-action'
 import { useNotifications } from '@/hooks/use-notifications'
 import { useTopNavLinks } from '@/hooks/use-top-nav-links'
+/* theme:console-noir:start */
+import { CONSOLE_NOIR_THEME } from '@/themes/console-noir/config'
+/* theme:console-noir:end */
 
 import { defaultTopNavLinks } from '../config/top-nav.config'
 import type { TopNavLink } from '../types'
@@ -115,7 +118,9 @@ export function AppHeader({
     <Header>
       <div className='@container/system-brand flex min-w-0 flex-1 items-center gap-1'>
         <SystemBrand variant='inline' />
-        <SystemUpdateAction presentation='version' />
+        {!CONSOLE_NOIR_THEME.hideBrandVersion && (
+          <SystemUpdateAction presentation='version' />
+        )}
       </div>
 
       {leftContent ? (

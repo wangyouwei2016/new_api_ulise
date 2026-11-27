@@ -1,0 +1,150 @@
+/*
+Copyright (C) 2023-2026 QuantumNous
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+For commercial licensing, please contact support@quantumnous.com
+*/
+
+/* ── Console Noir Frontend Theme (SpiderAI-inspired retro-technical aesthetic) ── */
+.theme-console-noir {
+  /* Day mode: warm retro hardware gray canvas with high-contrast dark ink */
+  --cn-bg: #e6e8e4;
+  --cn-surface: #f1f2ef;
+  --cn-sunk: #dcdfda;
+  --cn-hover: #d4d8d2;
+  --cn-line: #cdd1cc;
+  --cn-line-strong: #b6bbb5;
+  --cn-ink: #111412;
+  --cn-ink-2: #4b524e;
+  --cn-ink-3: #68706b;
+  --cn-pri-bg: #111412;
+  --cn-pri-ink: #f1f2ef;
+  --cn-pri-hover: #262b28;
+  --cn-accent: #2338e0;
+  --cn-accent-soft: rgb(35 56 224 / 0.1);
+  --cn-ok: #0f7a55;
+  --cn-warn: #9c5b00;
+  --cn-warn-soft: rgb(156 91 0 / 0.12);
+
+  /* Hardware monitor always remains deep charcoal for authentic contrast */
+  --cn-screen-bg: #0d0f0e;
+  --cn-screen-surface: #141816;
+  --cn-screen-line: #262b29;
+  --cn-screen-line-strong: #363c39;
+  --cn-screen-ink: #e2e7e4;
+  --cn-screen-ink-2: #9aa29e;
+  --cn-screen-ink-3: #69716d;
+  --cn-code-key: #a9b5ff;
+  --cn-code-str: #e2c27e;
+  --cn-code-num: #8fd3b6;
+  --cn-code-highlight-bg: rgb(227 168 70 / 0.1);
+  --cn-code-highlight-bar: #e3a846;
+
+  background-color: var(--cn-bg);
+  color: var(--cn-ink);
+}
+
+.dark .theme-console-noir {
+  /* Night mode: deep charcoal-slate canvas with crisp off-white ink */
+  --cn-bg: #141716;
+  --cn-surface: #1a1e1c;
+  --cn-sunk: #101312;
+  --cn-hover: #202523;
+  --cn-line: #262b29;
+  --cn-line-strong: #363c39;
+  --cn-ink: #e2e7e4;
+  --cn-ink-2: #9aa29e;
+  --cn-ink-3: #69716d;
+  --cn-pri-bg: #e2e7e4;
+  --cn-pri-ink: #111412;
+  --cn-pri-hover: #c9d0cc;
+  --cn-accent: #8c9aff;
+  --cn-accent-soft: rgb(140 154 255 / 0.14);
+  --cn-ok: #45c893;
+  --cn-warn: #e3a846;
+  --cn-warn-soft: rgb(227 168 70 / 0.14);
+}
+
+/* Header refinement when rendered inside the Console Noir homepage */
+.theme-console-noir > header {
+  border-bottom: 1px solid var(--cn-line);
+  background-color: color-mix(in srgb, var(--cn-bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.theme-console-noir > header nav {
+  border-radius: 0.75rem;
+}
+
+.theme-console-noir-screen {
+  background-color: var(--cn-screen-bg);
+  color: var(--cn-screen-ink);
+  border: 1px solid var(--cn-screen-line);
+  box-shadow:
+    0 24px 64px -28px rgb(0 0 0 / 0.55),
+    inset 0 0 64px rgb(0 0 0 / 0.55);
+}
+
+.theme-console-noir-code-line-highlight {
+  background-color: var(--cn-code-highlight-bg);
+  border-left: 2px solid var(--cn-code-highlight-bar);
+}
+
+/* Channel auto-cycle timer progress bar */
+@keyframes cn-channel-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.cn-channel-timer {
+  transform-origin: left center;
+  animation-name: cn-channel-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Optional subtle CRT scanlines + vignette when user enables CRT mode */
+.cn-crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 0) 0px,
+      rgb(255 255 255 / 0) 2px,
+      rgb(0 0 0 / 0.11) 3px,
+      rgb(0 0 0 / 0.11) 4px
+    ),
+    radial-gradient(ellipse at center, transparent 62%, rgb(0 0 0 / 0.28) 100%);
+}
+
+.theme-console-noir footer {
+  border-color: var(--cn-line);
+  background-color: var(--cn-bg);
+  padding-bottom: 3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-channel-timer {
+    animation: none !important;
+    transform: scaleX(1);
+  }
+}

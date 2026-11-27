@@ -29,6 +29,9 @@ For commercial licensing, please contact support@quantumnous.com
 
 @import './theme.css';
 @import './theme-presets.css';
+/* theme:console-noir:start */
+@import '../themes/console-noir/styles.css';
+/* theme:console-noir:end */
 
 @layer base {
   :root {

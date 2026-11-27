@@ -33,6 +33,9 @@ import { useSystemConfig } from '@/hooks/use-system-config'
 import { useTopNavLinks } from '@/hooks/use-top-nav-links'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/stores/auth-store'
+/* theme:console-noir:start */
+import { CONSOLE_NOIR_THEME } from '@/themes/console-noir/config'
+/* theme:console-noir:end */
 
 import { defaultTopNavLinks } from '../config/top-nav.config'
 import type { TopNavLink } from '../types'
@@ -59,6 +62,7 @@ export interface PublicHeaderProps {
   showNavigation?: boolean
   showAuthButtons?: boolean
   showNotifications?: boolean
+  showVersion?: boolean
   className?: string
 }
 
@@ -72,6 +76,7 @@ export function PublicHeader(props: PublicHeaderProps) {
     homeUrl = '/',
     showAuthButtons = true,
     showNotifications = true,
+    showVersion = !CONSOLE_NOIR_THEME.hideBrandVersion,
   } = props
 
   const { t } = useTranslation()
@@ -234,7 +239,7 @@ export function PublicHeader(props: PublicHeaderProps) {
                   )}
                 </span>
               </Link>
-              <SystemUpdateAction presentation='version' />
+              {showVersion && <SystemUpdateAction presentation='version' />}
             </div>
 
             {/* Desktop nav */}
