@@ -17,6 +17,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 
+import { CONSOLE_NOIR_THEME } from '../config'
+
 export interface ConsoleCodeLine {
   id: string
   text: string
@@ -50,10 +52,11 @@ export function normalizeGatewayBaseUrl(rawUrl?: string): string {
   if (trimmed) {
     return trimmed.replace(/\/+$/, '')
   }
-  if (typeof window !== 'undefined' && window.location?.origin) {
-    return window.location.origin.replace(/\/+$/, '')
-  }
-  return 'https://your-gateway.example.com'
+  return CONSOLE_NOIR_THEME.gatewayUrl.replace(/\/+$/, '')
+}
+
+function stripTrailingSlash(url: string): string {
+  return url.replace(/\/+$/, '')
 }
 
 export const CONSOLE_CHANNELS: ConsoleChannel[] = [
@@ -97,30 +100,17 @@ export const CONSOLE_CHANNELS: ConsoleChannel[] = [
         { text: '' },
         { text: '[model_providers.gateway]' },
         { text: 'name = "gateway"' },
-        { text: `base_url = "${baseUrl}/v1"`, highlighted: true },
+        {
+          text: `base_url = "${stripTrailingSlash(baseUrl)}/v1"`,
+          highlighted: true,
+        },
         { text: 'env_key = "OPENAI_API_KEY"', highlighted: true },
         { text: 'wire_api = "responses"' },
       ]),
   },
   {
-    id: 'gemini-cli',
-    code: '02',
-    name: 'Gemini CLI',
-    protocol: 'Gemini Native',
-    endpointPath: '/v1beta/models/{model}:generateContent',
-    filePath: '.env',
-    badgeKey: 'Gemini native',
-    buildLines: (baseUrl) =>
-      toCodeLines('gemini-cli', [
-        { text: '# Shell or project .env' },
-        { text: `GEMINI_API_BASE_URL="${baseUrl}"`, highlighted: true },
-        { text: 'GEMINI_API_KEY="sk-your-api-key"', highlighted: true },
-        { text: 'GEMINI_MODEL="gemini-2.5-pro"' },
-      ]),
-  },
-  {
     id: 'cherry-studio',
-    code: '03',
+    code: '02',
     name: 'Cherry Studio',
     protocol: 'OpenAI Compatible',
     endpointPath: '/v1/chat/completions',
@@ -136,7 +126,7 @@ export const CONSOLE_CHANNELS: ConsoleChannel[] = [
   },
   {
     id: 'openai-sdk',
-    code: '04',
+    code: '03',
     name: 'SDK / curl',
     protocol: 'OpenAI Chat',
     endpointPath: '/v1/chat/completions',
@@ -147,7 +137,10 @@ export const CONSOLE_CHANNELS: ConsoleChannel[] = [
         { text: 'import OpenAI from "openai"' },
         { text: '' },
         { text: 'const client = new OpenAI({' },
-        { text: `  baseURL: "${baseUrl}/v1",`, highlighted: true },
+        {
+          text: `  baseURL: "${stripTrailingSlash(baseUrl)}/v1",`,
+          highlighted: true,
+        },
         { text: '  apiKey: process.env.GATEWAY_API_KEY,', highlighted: true },
         { text: '})' },
       ]),

@@ -42,9 +42,9 @@ Frontend-only homepage theme for **New API** (zero backend changes).
 - **No version next to top-left logo**: hides the version badge in the public header, app header, and sidebar brand area.
 - **Usage-focused homepage**:
   - Preserves the core slogan: \`统一 API 网关，服务于海量 AI 模型\` (\`Unified API Gateway for Vast Range of AI Models\`).
-  - Interactive 5-channel client quickstart monitor (\`Claude Code\`, \`Codex CLI\`, \`Gemini CLI\`, \`Cherry Studio\`, \`SDK / curl\`) with live Gateway Base URL injection and one-click copy.
+  - Interactive 4-channel client quickstart monitor (\`Claude Code\`, \`Codex CLI\`, \`Cherry Studio\`, \`SDK / curl\`) with configured Gateway Base URL (\`https://api.weigeai.com\`) and one-click copy.
   - Preserves the 3-step **Workflow** section in an easy-to-edit file: \`web/src/themes/console-noir/data/workflow-steps.ts\`.
-  - Dual Dark/Light theme tokens + optional subtle CRT scanline toggle in the bottom status bar.
+  - Dual Light/Dark monochrome tokens (defaults to Light mode, matching Sign in button style) with a clean footer-free layout.
 - **Upgrade-friendly**: all theme code is isolated in \`web/src/themes/console-noir/\`, with minimal marker-delimited hooks in 6 frontend files.
 
 ## Apply to a New Version of New API

@@ -19,7 +19,9 @@ For commercial licensing, please contact support@quantumnous.com
 
 export interface WorkflowStepDefinition {
   num: string
+  tag: string
   titleKey: string
+  shortDescKey: string
   descKey: string
   actionLabelKey: string
   /** Target route when user is authenticated */
@@ -29,13 +31,15 @@ export interface WorkflowStepDefinition {
 }
 
 /**
- * Editable workflow steps for the homepage.
- * Customize titles, descriptions, or target routes here without touching layout components.
+ * Editable workflow steps for the homepage visual quickstart flow diagram.
+ * Customize titles, tags, descriptions, or target routes here without touching layout components.
  */
 export const WORKFLOW_STEPS: WorkflowStepDefinition[] = [
   {
     num: '01',
+    tag: 'sk-***',
     titleKey: 'Create API Key',
+    shortDescKey: 'Generate a token in Console',
     descKey:
       'Generate an API key in the console and configure model access and quota limits as needed.',
     actionLabelKey: 'Manage API Keys',
@@ -44,16 +48,20 @@ export const WORKFLOW_STEPS: WorkflowStepDefinition[] = [
   },
   {
     num: '02',
+    tag: 'Base URL + Key',
     titleKey: 'Configure Client or SDK',
+    shortDescKey: 'Pick one of 3 setup methods below',
     descKey:
       'Replace the Base URL with this gateway endpoint and paste your key into Claude Code, Codex CLI, Cherry Studio, or any compatible SDK.',
     actionLabelKey: 'View Config Examples',
-    authTo: '#console-quickstart',
-    guestTo: '#console-quickstart',
+    authTo: '#install-methods',
+    guestTo: '#install-methods',
   },
   {
     num: '03',
+    tag: 'Claude · GPT · Gemini',
     titleKey: 'Send Requests & Monitor',
+    shortDescKey: 'Call models & track usage live',
     descKey:
       'Start calling models across providers immediately and track logs, token usage, and billing in real time.',
     actionLabelKey: 'View Usage Logs',

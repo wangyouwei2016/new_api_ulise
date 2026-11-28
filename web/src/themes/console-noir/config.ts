@@ -25,6 +25,11 @@ export const CONSOLE_NOIR_THEME = {
   enabled: true,
   /** Hide the version indicator next to the top-left brand logo. */
   hideBrandVersion: true,
+  /** Default gateway endpoint shown on the homepage and client config snippets. */
+  gatewayUrl: 'https://api.weigeai.com',
+  /** Default display & color mode for first-time visitors. */
+  defaultThemeMode: 'light' as const,
+  defaultCrtEnabled: false,
   /** Interval (ms) between automatic channel switches in the hero console. */
   autoCycleChannelsMs: 5500,
 } as const

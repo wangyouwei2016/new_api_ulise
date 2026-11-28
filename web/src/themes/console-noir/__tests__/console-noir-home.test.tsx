@@ -130,25 +130,107 @@ describe('ConsoleNoirHome theme', () => {
     expect(screen.getByText('Send Requests & Monitor')).toBeInTheDocument()
   })
 
-  test('switches interactive client config channels and renders live gateway URL', async () => {
+  test('switches interactive client config channels without Gemini and uses configured gateway URL', async () => {
     const user = userEvent.setup()
     render(<ConsoleNoirHome isAuthenticated={false} />, { wrapper: Wrapper })
 
+    expect(screen.getAllByRole('tab')).toHaveLength(4)
+    expect(
+      screen.queryByRole('tab', { name: /Gemini/i })
+    ).not.toBeInTheDocument()
     expect(screen.getByText('CH 00')).toBeInTheDocument()
     expect(screen.getByText('~/.claude/settings.json')).toBeInTheDocument()
     expect(
-      screen.getAllByText(/https:\/\/api\.example\.com/).length
+      screen.getAllByText('https://api.weigeai.com').length
     ).toBeGreaterThan(0)
+    expect(
+      screen.queryByText('https://api.weigeai.com/')
+    ).not.toBeInTheDocument()
+
+    expect(document.documentElement).toHaveClass('light')
+    expect(screen.queryByRole('contentinfo')).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('complementary', { name: 'Gateway status bar' })
+    ).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('tab', { name: /Codex CLI/i }))
 
     expect(screen.getByText('CH 01')).toBeInTheDocument()
     expect(screen.getByText('~/.codex/config.toml')).toBeInTheDocument()
     expect(
-      screen.getByText(/https:\/\/api\.example\.com\/v1/)
+      screen.getByText(/https:\/\/api\.weigeai\.com\/v1/)
     ).toBeInTheDocument()
     expect(
       screen.getByRole('button', { name: /Switch paused/i })
     ).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  test('renders three client installation methods and switches script platform', async () => {
+    const user = userEvent.setup()
+    render(<ConsoleNoirHome isAuthenticated={false} />, { wrapper: Wrapper })
+
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Three ways to connect your clients',
+      })
+    ).toBeInTheDocument()
+    expect(screen.getByText('Managed Tools')).toBeInTheDocument()
+    expect(screen.getByText('One-Click Script')).toBeInTheDocument()
+    expect(screen.getByText('Manual Configuration')).toBeInTheDocument()
+
+    // Method 01: Recommended managed tools
+    const downloadLinks = screen.getAllByRole('link', { name: 'Download' })
+    expect(downloadLinks).toHaveLength(2)
+    expect(downloadLinks[0]).toHaveAttribute('href', 'https://ccswitch.io/zh/')
+    expect(downloadLinks[1]).toHaveAttribute(
+      'href',
+      'https://usemagpie.ai/docs/zh/start'
+    )
+
+    // Method 02: One-click script defaults to macOS / Linux and switches to Windows
+    expect(
+      screen.getByText(
+        'curl -fsSL https://api.weigeai.com/install/claude-code.sh | bash'
+      )
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText('curl -fsSL https://api.weigeai.com/install/codex.sh | bash')
+    ).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Windows' }))
+
+    expect(
+      screen.getByText(
+        'irm https://api.weigeai.com/install/claude-code.ps1 | iex'
+      )
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText('irm https://api.weigeai.com/install/codex.ps1 | iex')
+    ).toBeInTheDocument()
+
+    // Method 03: Manual config links point to docs site manual pages
+    expect(
+      screen.getByRole('link', { name: 'Codex CLI' })
+    ).toHaveAttribute('href', 'https://docs.example.com/clients/codex-manual')
+
+    // Simplified three-step visual flow diagram appears above install methods
+    const workflowHeading = screen.getByRole('heading', {
+      level: 2,
+      name: 'Three steps to get started',
+    })
+    const installHeading = screen.getByRole('heading', {
+      level: 2,
+      name: 'Three ways to connect your clients',
+    })
+    expect(
+      Boolean(
+        workflowHeading.compareDocumentPosition(installHeading) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      )
+    ).toBe(true)
+    expect(
+      screen.getAllByRole('link', { name: 'View Config Examples' })[0]
+    ).toHaveAttribute('href', '#install-methods')
   })
 })

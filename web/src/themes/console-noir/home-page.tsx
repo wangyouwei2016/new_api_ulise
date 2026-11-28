@@ -18,18 +18,20 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, BookOpen, KeyRound } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { CopyButton } from '@/components/copy-button'
 import { PublicLayout } from '@/components/layout'
-import { Footer } from '@/components/layout/components/footer'
 import { Button } from '@/components/ui/button'
+import { useTheme } from '@/context/theme-provider'
 import { useStatus } from '@/hooks/use-status'
+import { THEME_STORAGE_KEYS } from '@/lib/theme-storage'
 
 import { ConsoleMonitor } from './components/console-monitor'
-import { StatusHudBar } from './components/status-hud-bar'
+import { InstallMethodsSection } from './components/install-methods-section'
 import { WorkflowSection } from './components/workflow-section'
+import { CONSOLE_NOIR_THEME } from './config'
 import { normalizeGatewayBaseUrl } from './data/channels'
 
 interface ConsoleNoirHomeProps {
@@ -39,12 +41,21 @@ interface ConsoleNoirHomeProps {
 export function ConsoleNoirHome(props: ConsoleNoirHomeProps) {
   const { t } = useTranslation()
   const { status } = useStatus()
-  const [crtEnabled, setCrtEnabled] = useState(false)
+  const { setTheme } = useTheme()
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    try {
+      if (!window.localStorage.getItem(THEME_STORAGE_KEYS.mode)) {
+        setTheme(CONSOLE_NOIR_THEME.defaultThemeMode)
+      }
+    } catch {
+      // Ignore storage failures when private mode blocks localStorage.
+    }
+  }, [setTheme])
 
   const isAuthenticated = Boolean(props.isAuthenticated)
-  const baseUrl = normalizeGatewayBaseUrl(
-    status?.server_address as string | undefined
-  )
+  const baseUrl = normalizeGatewayBaseUrl(CONSOLE_NOIR_THEME.gatewayUrl)
   const docsUrl =
     (status?.docs_link as string | undefined) || 'https://docs.newapi.pro'
   const isExternalDocs = docsUrl.startsWith('http')
@@ -194,18 +205,12 @@ export function ConsoleNoirHome(props: ConsoleNoirHomeProps) {
           </div>
         </section>
 
-        {/* Preserved Workflow Section (Easy to customize in data/workflow-steps.ts) */}
+        {/* Compact Three-Step Quickstart Flow Diagram */}
         <WorkflowSection isAuthenticated={isAuthenticated} />
+
+        {/* Three Client Installation Methods */}
+        <InstallMethodsSection baseUrl={baseUrl} docsUrl={docsUrl} />
       </main>
-
-      <Footer />
-
-      <StatusHudBar
-        crtEnabled={crtEnabled}
-        onToggleCrt={() => setCrtEnabled((prev) => !prev)}
-      />
-
-      {crtEnabled && <div aria-hidden='true' className='cn-crt-overlay' />}
     </PublicLayout>
   )
 }

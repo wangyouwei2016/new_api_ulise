@@ -164,11 +164,11 @@ export function ConsoleMonitor(props: ConsoleMonitorProps) {
 
   return (
     <div id='console-quickstart' className={cn('w-full', props.className)}>
-      {/* Channel Switcher Strip (00..04) */}
+      {/* Channel Switcher Strip (00..03) */}
       <div
         role='tablist'
         aria-label={t('Client configuration channels')}
-        className='mb-3 grid grid-cols-2 gap-2 sm:grid-cols-5'
+        className='mb-3 grid grid-cols-2 gap-2 sm:grid-cols-4'
       >
         {CONSOLE_CHANNELS.map((channel, index) => {
           const isActive = index === activeIndex

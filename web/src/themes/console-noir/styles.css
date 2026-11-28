@@ -32,8 +32,8 @@ For commercial licensing, please contact support@quantumnous.com
   --cn-pri-bg: #111412;
   --cn-pri-ink: #f1f2ef;
   --cn-pri-hover: #262b28;
-  --cn-accent: #2338e0;
-  --cn-accent-soft: rgb(35 56 224 / 0.1);
+  --cn-accent: #111412;
+  --cn-accent-soft: rgb(17 20 18 / 0.08);
   --cn-ok: #0f7a55;
   --cn-warn: #9c5b00;
   --cn-warn-soft: rgb(156 91 0 / 0.12);
@@ -51,6 +51,10 @@ For commercial licensing, please contact support@quantumnous.com
   --cn-code-num: #8fd3b6;
   --cn-code-highlight-bg: rgb(227 168 70 / 0.1);
   --cn-code-highlight-bar: #e3a846;
+
+  --primary: var(--cn-pri-bg);
+  --primary-foreground: var(--cn-pri-ink);
+  --ring: var(--cn-pri-bg);
 
   background-color: var(--cn-bg);
   color: var(--cn-ink);
@@ -70,8 +74,8 @@ For commercial licensing, please contact support@quantumnous.com
   --cn-pri-bg: #e2e7e4;
   --cn-pri-ink: #111412;
   --cn-pri-hover: #c9d0cc;
-  --cn-accent: #8c9aff;
-  --cn-accent-soft: rgb(140 154 255 / 0.14);
+  --cn-accent: #e2e7e4;
+  --cn-accent-soft: rgb(226 231 228 / 0.12);
   --cn-ok: #45c893;
   --cn-warn: #e3a846;
   --cn-warn-soft: rgb(227 168 70 / 0.14);
@@ -86,6 +90,16 @@ For commercial licensing, please contact support@quantumnous.com
 
 .theme-console-noir > header nav {
   border-radius: 0.75rem;
+}
+
+.theme-console-noir > header a[href='/sign-in'] {
+  background-color: var(--cn-pri-bg);
+  color: var(--cn-pri-ink);
+  border-color: transparent;
+}
+
+.theme-console-noir > header a[href='/sign-in']:hover {
+  background-color: var(--cn-pri-hover);
 }
 
 .theme-console-noir-screen {
@@ -117,29 +131,6 @@ For commercial licensing, please contact support@quantumnous.com
   animation-name: cn-channel-progress;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-}
-
-/* Optional subtle CRT scanlines + vignette when user enables CRT mode */
-.cn-crt-overlay {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgb(255 255 255 / 0) 0px,
-      rgb(255 255 255 / 0) 2px,
-      rgb(0 0 0 / 0.11) 3px,
-      rgb(0 0 0 / 0.11) 4px
-    ),
-    radial-gradient(ellipse at center, transparent 62%, rgb(0 0 0 / 0.28) 100%);
-}
-
-.theme-console-noir footer {
-  border-color: var(--cn-line);
-  background-color: var(--cn-bg);
-  padding-bottom: 3rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,6 +20,11 @@ export default defineConfig({
         plugins: [],
       },
     },
+    server: {
+      watch: {
+        ignored: ['**/.vitepress/dist/**'],
+      },
+    },
   },
 
   head: [

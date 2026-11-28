@@ -24,3 +24,9 @@ features:
     details: 集中查看服务条款、隐私政策与平台使用规则。
     link: /terms-and-conditions/terms
 ---
+
+<script setup>
+import HomeMethods from './.vitepress/theme/HomeMethods.vue'
+</script>
+
+<HomeMethods />
