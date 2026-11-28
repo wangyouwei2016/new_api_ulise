@@ -13,7 +13,7 @@
 - **按量计费（Pay-as-you-go）**：充值余额后按实际消耗 Token 扣费，无时间限制，适合个人开发者与弹性调用场景。
 - **兑换码 / 套餐**：若你持有兑换码，可在钱包页直接兑换并实时入账。
 
-详细计费说明与常见问题请查看 [计费与套餐](/user-guide/help-center#purchase-payment)。
+详细计费说明与常见问题请查看 [计费与套餐](/user-guide/billing)。
 
 ## 第二步：创建 API Key
 
@@ -28,24 +28,44 @@ API Key 等同于账户消费凭证，请勿提交到公开 Git 仓库或在前�
 
 ## 第三步：选择客户端接入 {#client-config}
 
-选择你最常用的工具，点击卡片直接跳转到对应配置步骤：
+提供三种客户端接入方式，按你的使用习惯选择对应入口：
+
+### 方式1：推荐工具
 
 <div class="doc-cards">
-  <a href="/user-guide/help-center#cc-switch-config">
+  <a href="/clients/cc-switch">
     <strong>CC Switch <span>推荐 →</span></strong>
     <p>一站式可视化管理多端配置，一键切换 Claude Code / Codex / Gemini 等代理参数。</p>
   </a>
-  <a href="/user-guide/help-center#claude-code-config">
-    <strong>Claude Code <span>→</span></strong>
-    <p>通过环境变量或 settings.json 接入 Anthropic 兼容接口，终端直接编程。</p>
+  <a href="/clients/magpie">
+    <strong>Magpie <span>推荐 →</span></strong>
+    <p>统一管理所有 AI Agent 与模型供应商，内置本机协议转换网关，支持路由组与用量统计。</p>
   </a>
-  <a href="/user-guide/help-center#codex-config">
-    <strong>Codex CLI <span>→</span></strong>
-    <p>配置 config.toml 与 API Key，在命令行中使用 GPT / Codex 系列模型。</p>
+</div>
+
+### 方式2：脚本一键配置
+
+<div class="doc-cards">
+  <a href="/user-guide/claude-code">
+    <strong>Claude Code（一键脚本） <span>→</span></strong>
+    <p>运行 Windows / macOS / Linux 一键脚本，自动检测环境并写入配置。</p>
   </a>
-  <a href="/user-guide/help-center#cherry-studio-config">
-    <strong>Cherry Studio <span>→</span></strong>
-    <p>桌面端多模型对话客户端，填写统一 Base URL 与密钥即可使用。</p>
+  <a href="/user-guide/codex">
+    <strong>Codex（一键脚本） <span>→</span></strong>
+    <p>运行一键脚本自动生成 config.toml，同时兼容 Codex CLI 与桌面端 App。</p>
+  </a>
+</div>
+
+### 方式3：手工配置
+
+<div class="doc-cards">
+  <a href="/clients/claude-code-manual">
+    <strong>Claude Code（手工配置） <span>→</span></strong>
+    <p>手动写入环境变量或 ~/.claude/settings.json，灵活可控无额外依赖。</p>
+  </a>
+  <a href="/clients/codex-manual">
+    <strong>Codex CLI（手工配置） <span>→</span></strong>
+    <p>手动安装 CLI 并编辑 ~/.codex/config.toml 与 auth.json。</p>
   </a>
 </div>
 

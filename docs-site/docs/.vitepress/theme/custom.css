@@ -141,9 +141,9 @@ html.dark .VPNavBarTitle .logo {
   color: var(--vp-c-brand-1) !important;
 }
 
-.Layout[data-nav-group="clients"] .VPNavBarMenuLink[href$="#cc-switch-config"],
-.Layout[data-nav-group="api"] .VPNavBarMenuLink[href$="#openai-compatible-api"],
-.Layout[data-nav-group="help"] .VPNavBarMenuLink[href$="#faq"],
+.Layout[data-nav-group="clients"] .VPNavBarMenuLink[href="/clients/cc-switch"],
+.Layout[data-nav-group="api"] .VPNavBarMenuLink[href="/api/openai"],
+.Layout[data-nav-group="help"] .VPNavBarMenuLink[href="/help/faq"],
 .Layout[data-nav-group="guide"] .VPNavBarMenuLink[href="/user-guide/getting-started"] {
   color: var(--vp-c-brand-1) !important;
 }
@@ -295,20 +295,6 @@ html.dark .VPSidebarItem.level-1.is-active > .item {
   font-weight: 550;
 }
 
-.Layout[data-help-anchor="true"]
-  .VPSidebarItem.level-1:has(> .item > a[href="/user-guide/help-center"])
-  > .item {
-  background: transparent;
-}
-
-.Layout[data-help-anchor="true"]
-  .VPSidebarItem.level-1:has(> .item > a[href="/user-guide/help-center"])
-  > .item
-  .text {
-  color: var(--vp-c-text-2);
-  font-weight: 400;
-}
-
 .VPSidebarItem.level-1:hover > .item {
   background: var(--vp-c-brand-soft);
 }
@@ -327,7 +313,8 @@ html.dark .VPSidebarItem.level-1.is-active > .item {
   white-space: nowrap;
 }
 
-.VPSidebarItem a[href="/user-guide/help-center#cc-switch-config"]::after {
+.VPSidebarItem a[href="/clients/cc-switch"]::after,
+.VPSidebarItem a[href="/clients/magpie"]::after {
   content: var(--docs-recommended);
   color: var(--vp-c-text-3);
   font-size: 12px;
